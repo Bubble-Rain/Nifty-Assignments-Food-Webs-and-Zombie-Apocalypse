@@ -24,6 +24,24 @@ def nodeWithEdge(graph):
 
     return graph
 
+
+def flattenPredecessors(graph):
+
+    return [predecessor for predecessors in graph.values() for predecessor in predecessors]
+
+def findUniqueNodeNames(graph):
+
+    nodeList = flattenPredecessors(graph)
+    nodeList.extend(graph.keys())
+
+    return sorted(list(set(nodeList)))
+
+def calcInDegree(graph):
+
+    unique_nodes = findUniqueNodeNames(graph)
+
+    return {node: len(graph[node]) if node in graph else 0 for node in unique_nodes}
+
 def findSinks(graph):
 
     nodesIncoming = list(graph.keys())
@@ -40,23 +58,6 @@ def findSources(graph):
     # Sources are nodes that have no predecessors
     return sorted([node for node in set(predecessors) if node not in nodesIncoming])
 
-def flattenPredecessors(graph):
-
-    return [predecessor for predecessors in graph.values() for predecessor in predecessors]
-
-def findUniqueNodeNames(graph):
-
-    nodeList = flattenPredecessors(graph)
-    nodeList.extend(graph.keys())
-
-    return sorted(list(set(nodeList)))
-    
-def calcInDegree(graph):
-
-    unique_nodes = graph 
-
-    return {key:len(value) for key,value in graph.items()}
-
 def findHigestIncoming(graph):
 
     numIncomingDict = {key:len(value) for key,value in graph.items()}
@@ -72,6 +73,7 @@ def findHighestOutgoing(graph):
     maxOutgoing = max(numOutgoingDict.values())
 
     return sorted([key for key in numOutgoingDict.keys() if numOutgoingDict[key] == maxOutgoing])
+
 
 
 
