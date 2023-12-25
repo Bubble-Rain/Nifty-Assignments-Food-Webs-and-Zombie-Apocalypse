@@ -40,6 +40,21 @@ def findSources(graph):
     # Sources are nodes that have no predecessors
     return sorted([node for node in set(predecessors) if node not in nodesIncoming])
 
+def flattenPredecessors(graph):
+
+    return [predecessor for predecessors in graph.values() for predecessor in predecessors]
+
+def findUniqueNodeNames(graph):
+
+    return 0
+    
+
+def calcInDegree(graph):
+
+    unique_nodes = graph 
+
+    return {key:len(value) for key,value in graph.items()}
+
 def findHigestIncoming(graph):
 
     numIncomingDict = {key:len(value) for key,value in graph.items()}
@@ -55,6 +70,8 @@ def findHighestOutgoing(graph):
     maxOutgoing = max(numOutgoingDict.values())
 
     return sorted([key for key in numOutgoingDict.keys() if numOutgoingDict[key] == maxOutgoing])
+
+
 
     
 

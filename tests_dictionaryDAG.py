@@ -39,6 +39,17 @@ def test_add_immutability_value():
 
     assert testDAG1 != testDAG2
 
+def test_flatten_predecessors():
+
+    testDAG = createDAG()
+    testDAG = addRelationship("1","0",testDAG)
+    testDAG = addRelationship("2","0",testDAG)
+    testDAG = addRelationship("2","1",testDAG)
+    testDAG = addRelationship("1","5",testDAG)
+    testDAG = addRelationship("8","6",testDAG)
+
+    assert ["0","0","1","5","6"] == sorted(flattenPredecessors(testDAG))
+
 def test_find_sources():
 
     testDAG = createDAG()
@@ -60,6 +71,19 @@ def test_find_sinks():
     testDAG = addRelationship("8","6",testDAG)
     
     assert ["2","8"] == findSinks(testDAG)
+
+def test_find_incoming():
+
+    testDAG = createDAG()
+    testDAG = addRelationship("1","0",testDAG)
+    testDAG = addRelationship("2","0",testDAG)
+    testDAG = addRelationship("2","1",testDAG)
+    testDAG = addRelationship("1","5",testDAG)
+    testDAG = addRelationship("8","6",testDAG)
+    
+    assert ["1","2"] == findHigestIncoming(testDAG)
+
+
 
 def test_find_highest_incoming():
 
@@ -91,6 +115,7 @@ if __name__ == "__main__":
     test_add_to_same_node_DAG()
     test_add_immutability_key()
     test_add_immutability_value()
+    test_flatten_predecessors()
     test_find_sources()
     test_find_sinks()
     test_find_highest_incoming()
