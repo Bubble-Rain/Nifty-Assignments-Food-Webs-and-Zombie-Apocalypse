@@ -72,6 +72,18 @@ def test_find_highest_incoming():
     
     assert ["1","2"] == findHigestIncoming(testDAG)
 
+def test_find_highest_outgoing():
+
+    testDAG = createDAG()
+    testDAG = addRelationship("1","0",testDAG)
+    testDAG = addRelationship("2","0",testDAG)
+    testDAG = addRelationship("2","1",testDAG)
+    testDAG = addRelationship("1","5",testDAG)
+    testDAG = addRelationship("8","6",testDAG)
+    testDAG = addRelationship("8","1",testDAG)
+    
+    assert ["0","1"] == findHighestOutgoing(testDAG)
+
 if __name__ == "__main__":
 
     test_create_DAG()
@@ -82,5 +94,6 @@ if __name__ == "__main__":
     test_find_sources()
     test_find_sinks()
     test_find_highest_incoming()
+    test_find_highest_outgoing()
     print("Success!!")
 

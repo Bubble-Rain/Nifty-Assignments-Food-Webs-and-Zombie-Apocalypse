@@ -47,6 +47,17 @@ def findHigestIncoming(graph):
 
     return sorted([key for key in numIncomingDict.keys() if numIncomingDict[key] == maxIncoming])
 
+def findHighestOutgoing(graph):
+
+    predecessors =  [predecessor for predecessors in graph.values() for predecessor in predecessors]
+
+    numOutgoingDict = {node:predecessors.count(node) for node in set(predecessors)}
+    maxOutgoing = max(numOutgoingDict.values())
+
+    return sorted([key for key in numOutgoingDict.keys() if numOutgoingDict[key] == maxOutgoing])
+
+    
+
         
 
 
