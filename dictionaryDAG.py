@@ -28,7 +28,6 @@ def addRelationship(node,predecessor, graph):
 
     relationshipsCopy = dict(sorted(relationshipsCopy.items()))
 
-
     nodeNamesCopy = graphCopy.nodeNames.copy()
 
     if node not in nodeNamesCopy:
@@ -45,11 +44,11 @@ def addRelationship(node,predecessor, graph):
 
 def nodeWithEdge(graph):
 
-    return graph
+    return graph.relationships
 
 def flattenPredecessors(graph):
 
-    return [predecessor for predecessors in graph.values() for predecessor in predecessors]
+    return [predecessor for predecessors in graph.relationships.values() for predecessor in predecessors]
 
 def findUniqueNodeNames(graph):
 
