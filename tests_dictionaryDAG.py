@@ -53,17 +53,6 @@ def test_flatten_predecessors():
 
     assert ["0","0","1","5","6"] == sorted(flattenPredecessors(testDAG))
 
-def test_find_unique_node_names():
-
-    testDAG = createDAG()
-    testDAG = addRelationship("1","0",testDAG)
-    testDAG = addRelationship("2","0",testDAG)
-    testDAG = addRelationship("2","1",testDAG)
-    testDAG = addRelationship("1","5",testDAG)
-    testDAG = addRelationship("8","6",testDAG)
-
-    assert ["0","1","2","5","6","8"] == sorted(flattenPredecessors(testDAG))
-
 def test_calc_incoming_degree():
 
     testDAG = createDAG()
@@ -142,10 +131,12 @@ if __name__ == "__main__":
     test_add_immutability_key()
     test_add_immutability_value()
 
-    """
+    
     test_flatten_predecessors()
-    test_calc_incoming_degree()
 
+    
+    test_calc_incoming_degree()
+    """
     test_find_sources()
     test_find_sinks()
     test_find_highest_incoming()

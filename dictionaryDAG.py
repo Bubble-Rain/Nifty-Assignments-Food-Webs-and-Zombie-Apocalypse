@@ -50,18 +50,9 @@ def flattenPredecessors(graph):
 
     return [predecessor for predecessors in graph.relationships.values() for predecessor in predecessors]
 
-def findUniqueNodeNames(graph):
-
-    nodeList = flattenPredecessors(graph)
-    nodeList.extend(graph.keys())
-
-    return sorted(list(set(nodeList)))
-
 def calcInDegree(graph):
 
-    unique_nodes = findUniqueNodeNames(graph)
-
-    return {node: len(graph[node]) if node in graph else 0 for node in unique_nodes}
+    return {node: len(graph.relationships[node]) if node in graph.relationships else 0 for node in graph.nodeNames}
 
 def calcOutDegree(graph):
 
