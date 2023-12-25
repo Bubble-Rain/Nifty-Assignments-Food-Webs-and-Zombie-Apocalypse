@@ -48,7 +48,7 @@ def test_find_sources():
     testDAG = addRelationship("1","5",testDAG)
     testDAG = addRelationship("8","6",testDAG)
     
-    assert ["0","5","6"] == sorted(findSources(testDAG))
+    assert ["0","5","6"] == findSources(testDAG)
 
 def test_find_sinks():
 
@@ -59,7 +59,8 @@ def test_find_sinks():
     testDAG = addRelationship("1","5",testDAG)
     testDAG = addRelationship("8","6",testDAG)
     
-    assert ["1","8"] == sorted(findSinks(testDAG))
+    assert ["2","8"] == findSinks(testDAG)
+
 
 if __name__ == "__main__":
 

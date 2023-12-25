@@ -30,7 +30,7 @@ def findSinks(graph):
     predecessors =  [predecessor for predecessors in graph.values() for predecessor in predecessors]
 
     # Sinks are nodes who aren't predecessors for other nodes
-    return [node for node in nodesIncoming if node not in set(predecessors)]
+    return sorted([node for node in nodesIncoming if node not in set(predecessors)])
 
 def findSources(graph):
 
@@ -38,7 +38,15 @@ def findSources(graph):
     predecessors =  [predecessor for predecessors in graph.values() for predecessor in predecessors]
 
     # Sources are nodes that have no predecessors
-    return [node for node in set(predecessors) if node not in nodesIncoming]
+    return sorted([node for node in set(predecessors) if node not in nodesIncoming])
+
+def findHigestIncoming(graph):
+
+    numIncomingDict = {key:len(value) for key,value in graph.items()}
+    maxIncoming = max(numIncomingDict.values())
+
+    return sorted([key for key in numIncomingDict.keys() if numIncomingDict[key] == maxIncoming])
+
         
 
 
