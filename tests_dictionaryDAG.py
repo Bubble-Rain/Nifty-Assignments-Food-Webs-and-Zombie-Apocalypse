@@ -50,6 +50,17 @@ def test_flatten_predecessors():
 
     assert ["0","0","1","5","6"] == sorted(flattenPredecessors(testDAG))
 
+def test_find_unique_node_names():
+
+    testDAG = createDAG()
+    testDAG = addRelationship("1","0",testDAG)
+    testDAG = addRelationship("2","0",testDAG)
+    testDAG = addRelationship("2","1",testDAG)
+    testDAG = addRelationship("1","5",testDAG)
+    testDAG = addRelationship("8","6",testDAG)
+
+    assert ["0","1","2","5","6","8"] == sorted(flattenPredecessors(testDAG))
+
 def test_find_sources():
 
     testDAG = createDAG()

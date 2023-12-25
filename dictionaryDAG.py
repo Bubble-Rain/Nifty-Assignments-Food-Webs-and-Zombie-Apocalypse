@@ -46,9 +46,11 @@ def flattenPredecessors(graph):
 
 def findUniqueNodeNames(graph):
 
-    return 0
-    
+    nodeList = flattenPredecessors(graph)
+    nodeList.extend(graph.keys())
 
+    return sorted(list(set(nodeList)))
+    
 def calcInDegree(graph):
 
     unique_nodes = graph 
