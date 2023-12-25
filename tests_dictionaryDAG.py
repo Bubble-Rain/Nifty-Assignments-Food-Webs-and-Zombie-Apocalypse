@@ -27,7 +27,7 @@ def test_add_immutability_key():
 
     testDAG1 = addRelationship("1","0",testDAG1)
 
-    assert testDAG1 != testDAG2
+    assert testDAG1.relationships != testDAG2.relationships
 
 def test_add_immutability_value():
 
@@ -38,9 +38,9 @@ def test_add_immutability_value():
     testDAG2 = testDAG1
     testDAG1 = addRelationship("1","10",testDAG1)
     
-    testDAG1["1"][0] = "Wrong"
+    testDAG1.relationships["1"][0] = "Wrong"
 
-    assert testDAG1 != testDAG2
+    assert testDAG1.relationships != testDAG2.relationships
 
 def test_flatten_predecessors():
 
@@ -138,9 +138,11 @@ if __name__ == "__main__":
     test_create_DAG()
     test_add_new_node_DAG()
     test_add_to_same_node_DAG()
-    """
+
     test_add_immutability_key()
     test_add_immutability_value()
+
+    """
     test_flatten_predecessors()
     test_calc_incoming_degree()
 
