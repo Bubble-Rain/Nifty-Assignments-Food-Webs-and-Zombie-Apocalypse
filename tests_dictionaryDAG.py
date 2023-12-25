@@ -13,6 +13,13 @@ def test_add_new_node_DAG():
     testDAG = addRelationship("1","0",testDAG)
     assert (dict({'1': ["0"]}) == testDAG.relationships) == (testDAG.nodeNames == ["0","1"])
 
+def test_repeated_node_DAG():
+
+    testDAG = createDAG()
+    testDAG = addRelationship("1","0",testDAG)
+    testDAG = addRelationship("1","0",testDAG)
+    assert (dict({'1': ["0"]}) == testDAG.relationships) == (testDAG.nodeNames == ["0","1"])
+
 def test_add_to_same_node_DAG():
 
     testDAG = createDAG()
@@ -135,10 +142,24 @@ def test_find_highest_outgoing():
     
     assert ["0","1"] == findHighestOutgoing(testDAG)
 
+def test_calculating_distance_from_furthest_source():
+
+    testDAG = createDAG()
+    testDAG = addRelationship("1","0",testDAG)
+    testDAG = addRelationship("2","0",testDAG)
+    testDAG = addRelationship("2","1",testDAG)
+    testDAG = addRelationship("8","2",testDAG)
+    testDAG = addRelationship("1","5",testDAG)
+    testDAG = addRelationship("8","6",testDAG)
+    testDAG = addRelationship("8","1",testDAG)
+    
+    assert {"1":1, "0":0} == calcLongestPathsFromSource(testDAG)
+
 if __name__ == "__main__":
 
     test_create_DAG()
     test_add_new_node_DAG()
+    test_repeated_node_DAG()
     test_add_to_same_node_DAG()
 
     test_add_immutability_key()
@@ -156,11 +177,8 @@ if __name__ == "__main__":
 
     test_find_highest_incoming()
     test_find_highest_outgoing()
-    """
-    test_find_sources()
-    test_find_sinks()
-    test_find_highest_incoming()
-    test_find_highest_outgoing()
-    """
+
+    #test_calculating_distance_from_furthest_source()
+    
     print("Success!!")
 

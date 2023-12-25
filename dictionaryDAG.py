@@ -19,6 +19,10 @@ def addRelationship(node,predecessor, graph):
     if node in relationshipsCopy:
 
         predecessorsCopy = relationshipsCopy[node].copy()
+        
+        if predecessor in predecessorsCopy:
+            return graph
+
         predecessorsCopy.append(predecessor)
 
         relationshipsCopy[node] = sorted(predecessorsCopy)
@@ -88,6 +92,24 @@ def findHighestOutgoing(graph):
     max_outdegree = max(outdegree.values())
 
     return filterForDegreeByN(outdegree,max_outdegree)
+
+def calcLongestPath(node, relationships):
+
+    if node not in relationships:
+        return 0
+    else:
+
+        predecessors = relationships[node]
+        predecessorsDistance = [ calcLongestPath(predecessor, relationships) for predecessor in predecessors]
+
+        return 1 + max(predecessorsDistance)
+
+def calcLongestPathsFromSource(graph):
+    
+    data = {node:calcLongestPath(node, graph.relationships) for node in graph.nodeNames}
+
+    return dict(sorted(data.items(), key = lambda x:x[1], reverse = True))
+    
 
 
 
