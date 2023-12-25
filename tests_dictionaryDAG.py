@@ -61,6 +61,16 @@ def test_find_sinks():
     
     assert ["2","8"] == findSinks(testDAG)
 
+def test_find_highest_incoming():
+
+    testDAG = createDAG()
+    testDAG = addRelationship("1","0",testDAG)
+    testDAG = addRelationship("2","0",testDAG)
+    testDAG = addRelationship("2","1",testDAG)
+    testDAG = addRelationship("1","5",testDAG)
+    testDAG = addRelationship("8","6",testDAG)
+    
+    assert ["1","2"] == findHigestIncoming(testDAG)
 
 if __name__ == "__main__":
 
@@ -71,5 +81,6 @@ if __name__ == "__main__":
     test_add_immutability_value()
     test_find_sources()
     test_find_sinks()
+    test_find_highest_incoming()
     print("Success!!")
 
