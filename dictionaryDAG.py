@@ -63,6 +63,10 @@ def calcOutDegree(graph):
 
 def findSinks(graph):
 
+    outdegree = calcOutDegree(graph)
+
+    return [node for node, num_out in outdegree.items() if num_out == 0]
+
     nodesIncoming = list(graph.keys())
     predecessors =  [predecessor for predecessors in graph.values() for predecessor in predecessors]
 

@@ -150,6 +150,8 @@ if __name__ == "__main__":
     
     test_calc_incoming_degree()
     test_calc_outgoing_degree()
+
+    test_find_sinks()
     """
     test_find_sources()
     test_find_sinks()
