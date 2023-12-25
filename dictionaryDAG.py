@@ -79,6 +79,13 @@ def findSources(graph):
 
     return filterForDegreeByN(calcInDegree(graph),0)
 
+def findIntermediaries(graph):
+
+    indgree = calcInDegree(graph)
+    outdegree = calcOutDegree(graph)
+
+    return [node for node in graph.nodeNames if indgree[node] > 0 and outdegree[node] > 0]
+
 def findHigestIncoming(graph):
 
     indegree = calcInDegree(graph)
@@ -109,6 +116,7 @@ def calcLongestPathsFromSource(graph):
     data = {node:calcLongestPath(node, graph.relationships) for node in graph.nodeNames}
 
     return dict(sorted(data.items(), key = lambda x: (x[1],x[0]), reverse = True))
+
     
 
 
