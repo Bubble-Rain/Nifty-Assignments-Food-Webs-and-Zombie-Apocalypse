@@ -13,13 +13,16 @@ def addRelationship(node,predecessor, graph):
 
         predecessorsCopy = graphCopy[node].copy()
         predecessorsCopy.append(predecessor)
-        graphCopy[node] = predecessorsCopy
+        graphCopy[node] = sorted(predecessorsCopy)
 
     else:
         graphCopy[node] = [predecessor]
 
-    return graphCopy
+    return dict(sorted(graphCopy.items()))
 
+def nodeWithEdge(graph):
+
+    return graph
 
 def findSinks(graph):
 

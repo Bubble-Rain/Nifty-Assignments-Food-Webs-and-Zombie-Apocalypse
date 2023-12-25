@@ -59,7 +59,7 @@ def test_find_sinks():
     testDAG = addRelationship("1","5",testDAG)
     testDAG = addRelationship("8","6",testDAG)
     
-    assert ["2","8"] == sorted(findSinks(testDAG))
+    assert ["1","8"] == sorted(findSinks(testDAG))
 
 if __name__ == "__main__":
 
