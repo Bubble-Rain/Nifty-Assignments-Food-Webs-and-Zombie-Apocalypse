@@ -153,6 +153,8 @@ if __name__ == "__main__":
 
     test_find_sinks()
     test_find_sources()
+
+    test_find_highest_incoming()
     """
     test_find_sources()
     test_find_sinks()

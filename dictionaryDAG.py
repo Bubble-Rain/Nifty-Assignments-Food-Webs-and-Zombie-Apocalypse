@@ -73,13 +73,12 @@ def findSources(graph):
 
     return [node for node, num_in in indegree.items() if num_in == 0]
 
-    nodesIncoming = list(graph.keys())
-    predecessors =  [predecessor for predecessors in graph.values() for predecessor in predecessors]
-
-    # Sources are nodes that have no predecessors
-    return sorted([node for node in set(predecessors) if node not in nodesIncoming])
-
 def findHigestIncoming(graph):
+
+    indegree = calcInDegree(graph)
+    max_indegree = max(indegree.values())
+
+    return [node for node, num_in in indegree.items() if num_in == max_indegree]
 
     numIncomingDict = {key:len(value) for key,value in graph.items()}
     maxIncoming = max(numIncomingDict.values())
