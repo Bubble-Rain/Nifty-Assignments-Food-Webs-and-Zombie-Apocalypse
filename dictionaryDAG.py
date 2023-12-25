@@ -1,29 +1,51 @@
+from copy import copy
 
+class directed_acyclic_graph:
 
+    def __init__(self, relationships, nodeNames):
+        self.relationships = relationships
+        self.nodeNames = nodeNames
 
 def createDAG():
 
-    return {}
+    return directed_acyclic_graph({}, []);
 
 def addRelationship(node,predecessor, graph):
 
-    graphCopy = graph.copy()
+    graphCopy = copy(graph)
 
-    if node in graphCopy:
+    relationshipsCopy = graphCopy.relationships.copy()
 
-        predecessorsCopy = graphCopy[node].copy()
+    if node in relationshipsCopy:
+
+        predecessorsCopy = relationshipsCopy[node].copy()
         predecessorsCopy.append(predecessor)
-        graphCopy[node] = sorted(predecessorsCopy)
+
+        relationshipsCopy[node] = sorted(predecessorsCopy)
 
     else:
-        graphCopy[node] = [predecessor]
+        relationshipsCopy[node] = [predecessor]
 
-    return dict(sorted(graphCopy.items()))
+    relationshipsCopy = dict(sorted(relationshipsCopy.items()))
+
+
+    nodeNamesCopy = graphCopy.nodeNames.copy()
+
+    if node not in nodeNamesCopy:
+        
+        nodeNamesCopy.append(node)
+        nodeNamesCopy = sorted(nodeNamesCopy)
+
+    if predecessor not in nodeNamesCopy:
+       
+       nodeNamesCopy.append(predecessor)
+       nodeNamesCopy = sorted(nodeNamesCopy)
+
+    return directed_acyclic_graph(relationshipsCopy, nodeNamesCopy)
 
 def nodeWithEdge(graph):
 
     return graph
-
 
 def flattenPredecessors(graph):
 
@@ -41,6 +63,15 @@ def calcInDegree(graph):
     unique_nodes = findUniqueNodeNames(graph)
 
     return {node: len(graph[node]) if node in graph else 0 for node in unique_nodes}
+
+def calcOutDegree(graph):
+
+    unique_nodes = findUniqueNodeNames(graph)
+
+    predecessors =  flattenPredecessors(graph)
+    numOutgoingDict = {node:predecessors.count(node) for node in set(predecessors)}
+
+    return {node: len(numOutgoingDict[node]) if node in graph else 0 for node in unique_nodes}
 
 def findSinks(graph):
 

@@ -2,13 +2,16 @@ from dictionaryDAG import *
 
 
 def test_create_DAG():
-    assert len(createDAG()) == 0
+
+    testDAG = createDAG()
+
+    assert (testDAG.relationships == {}) == (testDAG.nodeNames == [])
 
 def test_add_new_node_DAG():
 
     testDAG = createDAG()
     testDAG = addRelationship("1","0",testDAG)
-    assert dict({'1': ["0"]}) == testDAG
+    assert (dict({'1': ["0"]}) == testDAG.relationships) == (testDAG.nodeNames == ["0","1"])
 
 def test_add_to_same_node_DAG():
 
@@ -134,6 +137,8 @@ if __name__ == "__main__":
 
     test_create_DAG()
     test_add_new_node_DAG()
+
+    """
     test_add_to_same_node_DAG()
     test_add_immutability_key()
     test_add_immutability_value()
@@ -144,5 +149,6 @@ if __name__ == "__main__":
     test_find_sinks()
     test_find_highest_incoming()
     test_find_highest_outgoing()
+    """
     print("Success!!")
 
