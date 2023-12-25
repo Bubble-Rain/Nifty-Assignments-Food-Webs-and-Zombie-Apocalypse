@@ -64,6 +64,17 @@ def test_calc_incoming_degree():
 
     assert {"0": 0,"1": 2,"2":2,"5": 0,"6": 0,"8":1} == calcInDegree(testDAG)
 
+def test_calc_outgoing_degree():
+
+    testDAG = createDAG()
+    testDAG = addRelationship("1","0",testDAG)
+    testDAG = addRelationship("2","0",testDAG)
+    testDAG = addRelationship("2","1",testDAG)
+    testDAG = addRelationship("1","5",testDAG)
+    testDAG = addRelationship("8","6",testDAG)
+
+    assert {"0": 2,"1": 1,"2":0,"5": 1,"6": 1,"8":0} == calcOutDegree(testDAG)
+
 def test_find_sources():
 
     testDAG = createDAG()
@@ -96,6 +107,8 @@ def test_find_incoming():
     testDAG = addRelationship("8","6",testDAG)
     
     assert ["1","2"] == findHigestIncoming(testDAG)
+
+
 
 
 
@@ -136,6 +149,7 @@ if __name__ == "__main__":
 
     
     test_calc_incoming_degree()
+    test_calc_outgoing_degree()
     """
     test_find_sources()
     test_find_sinks()

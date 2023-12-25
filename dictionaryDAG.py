@@ -56,12 +56,10 @@ def calcInDegree(graph):
 
 def calcOutDegree(graph):
 
-    unique_nodes = findUniqueNodeNames(graph)
-
     predecessors =  flattenPredecessors(graph)
     numOutgoingDict = {node:predecessors.count(node) for node in set(predecessors)}
 
-    return {node: len(numOutgoingDict[node]) if node in graph else 0 for node in unique_nodes}
+    return {node: numOutgoingDict[node] if node in numOutgoingDict else 0 for node in graph.nodeNames}
 
 def findSinks(graph):
 
