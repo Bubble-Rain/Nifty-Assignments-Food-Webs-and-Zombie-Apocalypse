@@ -100,6 +100,26 @@ def findHighestOutgoing(graph):
 
     return filterForDegreeByN(outdegree,max_outdegree)
 
+def evaluateNodeType(indegree, outdegree):
+
+    if indegree == 0:
+        return "Source"
+    elif outdegree == 0:
+        return "Sink"
+    else:
+        return "Intermediary"
+
+def evaluateNodeTypes(graph):
+
+    indgree = calcInDegree(graph)
+    outdegree = calcOutDegree(graph)
+
+    return {node: evaluateNodeType(indgree[node], outdegree[node]) for node in graph.nodeNames}
+
+
+
+
+
 def calcLongestPath(node, relationships):
 
     if node not in relationships:

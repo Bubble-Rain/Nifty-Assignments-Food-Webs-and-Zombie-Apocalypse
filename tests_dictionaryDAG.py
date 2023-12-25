@@ -165,6 +165,28 @@ def test_calculating_distance_from_furthest_source():
 
     assert {"10":5, "9":4, "8":3, "2": 2, "1":1, "6": 0, "5": 0, "0": 0 } == calcLongestPathsFromSource(testDAG)
 
+def test_evaluate_node_types():
+
+    testDAG = createDAG()
+    testDAG = addRelationship("1","0",testDAG)
+    testDAG = addRelationship("2","0",testDAG)
+    testDAG = addRelationship("2","1",testDAG)
+    testDAG = addRelationship("8","2",testDAG)
+    testDAG = addRelationship("1","5",testDAG)
+    testDAG = addRelationship("8","6",testDAG)
+    testDAG = addRelationship("8","1",testDAG)
+    testDAG = addRelationship("9","8",testDAG)
+    testDAG = addRelationship("10","9",testDAG)
+    testDAG = addRelationship("10","6",testDAG)
+
+    manualSinks = {node: "Sink" for node in findSinks(testDAG)} 
+    manualSources = {node: "Source" for node in findSources(testDAG)} 
+    manualIntermediaries = {node: "Intermediary" for node in findIntermediaries(testDAG)} 
+    manual =  {**manualSinks,**manualSources,**manualIntermediaries}
+    manual = dict(sorted(manual.items()))
+
+    assert manual == evaluateNodeTypes(testDAG)
+
 if __name__ == "__main__":
 
     test_create_DAG()
@@ -189,5 +211,7 @@ if __name__ == "__main__":
 
     test_calculating_distance_from_furthest_source()
     
+    test_evaluate_node_types()
+
     print("Success!!")
 
