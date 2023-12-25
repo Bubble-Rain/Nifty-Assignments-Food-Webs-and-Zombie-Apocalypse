@@ -61,31 +61,33 @@ def calcOutDegree(graph):
 
     return {node: numOutgoingDict[node] if node in numOutgoingDict else 0 for node in graph.nodeNames}
 
+def filterForDegreeByN(degree_dict, num_desired):
+
+    return [node for node, num_degree in degree_dict.items() if num_degree == num_desired]
+
 def findSinks(graph):
 
-    outdegree = calcOutDegree(graph)
-
-    return [node for node, num_out in outdegree.items() if num_out == 0]
+    return filterForDegreeByN(calcOutDegree(graph),0)
 
 def findSources(graph):
 
     indegree = calcInDegree(graph)
 
-    return [node for node, num_in in indegree.items() if num_in == 0]
+    return filterForDegreeByN(calcInDegree(graph),0)
 
 def findHigestIncoming(graph):
 
     indegree = calcInDegree(graph)
     max_indegree = max(indegree.values())
 
-    return [node for node, num_in in indegree.items() if num_in == max_indegree]
+    return filterForDegreeByN(indegree,max_indegree)
 
 def findHighestOutgoing(graph):
 
     outdegree = calcOutDegree(graph)
     max_outdegree = max(outdegree.values())
 
-    return [node for node, num_in in outdegree.items() if num_in == max_outdegree]
+    return filterForDegreeByN(outdegree,max_outdegree)
 
 
 
