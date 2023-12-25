@@ -115,10 +115,6 @@ def test_find_incoming():
     
     assert ["1","2"] == findHigestIncoming(testDAG)
 
-
-
-
-
 def test_find_highest_incoming():
 
     testDAG = createDAG()
@@ -152,8 +148,11 @@ def test_calculating_distance_from_furthest_source():
     testDAG = addRelationship("1","5",testDAG)
     testDAG = addRelationship("8","6",testDAG)
     testDAG = addRelationship("8","1",testDAG)
-    
-    assert {"1":1, "0":0} == calcLongestPathsFromSource(testDAG)
+    testDAG = addRelationship("9","8",testDAG)
+    testDAG = addRelationship("10","9",testDAG)
+    testDAG = addRelationship("10","6",testDAG)
+
+    assert {"10":5, "9":4, "8":3, "2": 2, "1":1, "6": 0, "5": 0, "0": 0 } == calcLongestPathsFromSource(testDAG)
 
 if __name__ == "__main__":
 
@@ -178,7 +177,7 @@ if __name__ == "__main__":
     test_find_highest_incoming()
     test_find_highest_outgoing()
 
-    #test_calculating_distance_from_furthest_source()
+    test_calculating_distance_from_furthest_source()
     
     print("Success!!")
 

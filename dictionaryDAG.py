@@ -108,7 +108,7 @@ def calcLongestPathsFromSource(graph):
     
     data = {node:calcLongestPath(node, graph.relationships) for node in graph.nodeNames}
 
-    return dict(sorted(data.items(), key = lambda x:x[1], reverse = True))
+    return dict(sorted(data.items(), key = lambda x: (x[1],x[0]), reverse = True))
     
 
 
