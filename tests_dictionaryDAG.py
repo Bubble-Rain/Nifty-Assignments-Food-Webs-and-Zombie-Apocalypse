@@ -17,7 +17,7 @@ def test_add_to_same_node_DAG():
     testDAG = addRelationship("1","10",testDAG)
     assert dict({'1': ["0","10"]}) == testDAG
 
-def test_add_immutability():
+def test_add_immutability_key():
 
     testDAG1 = createDAG()
     testDAG2 = testDAG1
@@ -26,11 +26,25 @@ def test_add_immutability():
 
     assert testDAG1 != testDAG2
 
+def test_add_immutability_value():
+
+
+    testDAG1 = createDAG()
+    testDAG1 = addRelationship("1","0",testDAG1)
+
+    testDAG2 = testDAG1
+    testDAG1 = addRelationship("1","10",testDAG1)
+    
+    testDAG1["1"][0] = "Wrong"
+
+    assert testDAG1 != testDAG2
+
 if __name__ == "__main__":
 
     test_create_DAG()
     test_add_new_node_DAG()
     test_add_to_same_node_DAG()
-    test_add_immutability()
+    test_add_immutability_key()
+    test_add_immutability_value()
     print("Success!!")
 
