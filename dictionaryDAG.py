@@ -80,19 +80,12 @@ def findHigestIncoming(graph):
 
     return [node for node, num_in in indegree.items() if num_in == max_indegree]
 
-    numIncomingDict = {key:len(value) for key,value in graph.items()}
-    maxIncoming = max(numIncomingDict.values())
-
-    return sorted([key for key in numIncomingDict.keys() if numIncomingDict[key] == maxIncoming])
-
 def findHighestOutgoing(graph):
 
-    predecessors =  flattenPredecessors(graph)
+    outdegree = calcOutDegree(graph)
+    max_outdegree = max(outdegree.values())
 
-    numOutgoingDict = {node:predecessors.count(node) for node in set(predecessors)}
-    maxOutgoing = max(numOutgoingDict.values())
-
-    return sorted([key for key in numOutgoingDict.keys() if numOutgoingDict[key] == maxOutgoing])
+    return [node for node, num_in in outdegree.items() if num_in == max_outdegree]
 
 
 
