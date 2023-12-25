@@ -64,7 +64,7 @@ def findHigestIncoming(graph):
 
 def findHighestOutgoing(graph):
 
-    predecessors =  [predecessor for predecessors in graph.values() for predecessor in predecessors]
+    predecessors =  flattenPredecessors(graph)
 
     numOutgoingDict = {node:predecessors.count(node) for node in set(predecessors)}
     maxOutgoing = max(numOutgoingDict.values())
