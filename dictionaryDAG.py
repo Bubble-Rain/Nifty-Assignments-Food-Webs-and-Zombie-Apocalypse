@@ -67,13 +67,11 @@ def findSinks(graph):
 
     return [node for node, num_out in outdegree.items() if num_out == 0]
 
-    nodesIncoming = list(graph.keys())
-    predecessors =  [predecessor for predecessors in graph.values() for predecessor in predecessors]
-
-    # Sinks are nodes who aren't predecessors for other nodes
-    return sorted([node for node in nodesIncoming if node not in set(predecessors)])
-
 def findSources(graph):
+
+    indegree = calcInDegree(graph)
+
+    return [node for node, num_in in indegree.items() if num_in == 0]
 
     nodesIncoming = list(graph.keys())
     predecessors =  [predecessor for predecessors in graph.values() for predecessor in predecessors]
