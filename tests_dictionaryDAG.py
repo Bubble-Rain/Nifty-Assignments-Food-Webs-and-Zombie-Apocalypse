@@ -39,6 +39,28 @@ def test_add_immutability_value():
 
     assert testDAG1 != testDAG2
 
+def test_find_sources():
+
+    testDAG = createDAG()
+    testDAG = addRelationship("1","0",testDAG)
+    testDAG = addRelationship("2","0",testDAG)
+    testDAG = addRelationship("2","1",testDAG)
+    testDAG = addRelationship("1","5",testDAG)
+    testDAG = addRelationship("8","6",testDAG)
+    
+    assert ["0","5","6"] == sorted(findSources(testDAG))
+
+def test_find_sinks():
+
+    testDAG = createDAG()
+    testDAG = addRelationship("1","0",testDAG)
+    testDAG = addRelationship("2","0",testDAG)
+    testDAG = addRelationship("2","1",testDAG)
+    testDAG = addRelationship("1","5",testDAG)
+    testDAG = addRelationship("8","6",testDAG)
+    
+    assert ["2","8"] == sorted(findSinks(testDAG))
+
 if __name__ == "__main__":
 
     test_create_DAG()
@@ -46,5 +68,7 @@ if __name__ == "__main__":
     test_add_to_same_node_DAG()
     test_add_immutability_key()
     test_add_immutability_value()
+    test_find_sources()
+    test_find_sinks()
     print("Success!!")
 

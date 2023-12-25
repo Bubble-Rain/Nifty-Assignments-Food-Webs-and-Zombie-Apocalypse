@@ -20,6 +20,22 @@ def addRelationship(node,predecessor, graph):
 
     return graphCopy
 
+
+def findSinks(graph):
+
+    nodesIncoming = list(graph.keys())
+    predecessors =  [predecessor for predecessors in graph.values() for predecessor in predecessors]
+
+    # Sinks are nodes who aren't predecessors for other nodes
+    return [node for node in nodesIncoming if node not in set(predecessors)]
+
+def findSources(graph):
+
+    nodesIncoming = list(graph.keys())
+    predecessors =  [predecessor for predecessors in graph.values() for predecessor in predecessors]
+
+    # Sources are nodes that have no predecessors
+    return [node for node in set(predecessors) if node not in nodesIncoming]
         
 
 
