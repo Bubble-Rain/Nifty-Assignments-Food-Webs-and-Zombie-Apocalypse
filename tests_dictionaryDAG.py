@@ -187,6 +187,22 @@ def test_evaluate_node_types():
 
     assert manual == evaluateNodeTypes(testDAG)
 
+def test_evaluating_incoming_node_type():
+
+    testDAG = createDAG()
+    testDAG = addRelationship("1","0",testDAG)
+    testDAG = addRelationship("2","0",testDAG)
+    testDAG = addRelationship("2","1",testDAG)
+    testDAG = addRelationship("8","2",testDAG)
+    testDAG = addRelationship("1","5",testDAG)
+    testDAG = addRelationship("8","6",testDAG)
+    testDAG = addRelationship("8","1",testDAG)
+    testDAG = addRelationship("9","8",testDAG)
+    testDAG = addRelationship("10","9",testDAG)
+    testDAG = addRelationship("10","6",testDAG)
+
+    assert {"1": "Only Source", "2": "Both", "8": "Both", "9": "Only Intermediary", "10": "Both" } == evaluateIncomingNodeTypes(testDAG)
+
 if __name__ == "__main__":
 
     test_create_DAG()
@@ -212,6 +228,8 @@ if __name__ == "__main__":
     test_calculating_distance_from_furthest_source()
     
     test_evaluate_node_types()
+
+    test_evaluating_incoming_node_type()
 
     print("Success!!")
 

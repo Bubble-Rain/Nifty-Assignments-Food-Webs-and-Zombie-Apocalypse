@@ -116,9 +116,27 @@ def evaluateNodeTypes(graph):
 
     return {node: evaluateNodeType(indgree[node], outdegree[node]) for node in graph.nodeNames}
 
+def evaluateIncomingNodeType(relatedNodes, nodeTypesDict):
 
+    nodeTypes = [nodeTypesDict[node] for node in relatedNodes]
 
+    # By definition a Sink should have no related nodes
+    types = ["Source","Intermediary"]
 
+    type_count = {type:nodeTypes.count(type) for type in types}
+
+    if type_count["Source"] > 0 and type_count["Intermediary"] > 0:
+        return "Both"
+    elif type_count["Source"] > 0:
+        return "Only Source"
+    else:
+        return "Only Intermediary"
+    
+def evaluateIncomingNodeTypes(graph):
+
+    nodeTypes = evaluateNodeTypes(graph)
+
+    return {node: evaluateIncomingNodeType(graph.relationships[node], nodeTypes) for node in graph.relationships.keys()}
 
 def calcLongestPath(node, relationships):
 
