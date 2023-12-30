@@ -86,7 +86,7 @@ def findIntermediaries(graph):
 
     return [node for node in graph.nodeNames if indgree[node] > 0 and outdegree[node] > 0]
 
-def findHigestIncoming(graph):
+def findHighestIncoming(graph):
 
     indegree = calcInDegree(graph)
     max_indegree = max(indegree.values())

@@ -135,7 +135,7 @@ def test_find_highest_incoming():
     testDAG = addDictionaryRelationship("1","5",testDAG)
     testDAG = addDictionaryRelationship("8","6",testDAG)
     
-    assert ["1","2"] == findHigestIncoming(testDAG)
+    assert ["1","2"] == findHighestIncoming(testDAG)
 
 def test_find_highest_outgoing():
 
