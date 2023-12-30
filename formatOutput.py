@@ -28,13 +28,11 @@ def oneType(type, dataList):
 
     return start + namesString
 
-
-
-def formatDictNames(dataDict):
+def formatDictNames(dataDict, valueFunction):
 
     namesString = ''
 
-    stringsList = ['  ' + name + ': ' + str(dataDict[name]) for name in dataDict.keys()]
+    stringsList = ['  ' + name + ': ' + valueFunction(dataDict[name]) for name in dataDict.keys()]
     
     return '\n'.join(stringsList)
 
@@ -42,7 +40,16 @@ def formatDictNames(dataDict):
 def dictSingleKey(attribute,dataDict):
 
     start = attribute + ':\n'
-    names = formatDictNames(dataDict)
+    names = formatDictNames(dataDict, str)
 
     return start + names
 
+def formatRelationshipDict(relation,dataDict):
+    return 1
+
+def relationships(relationShipType, relation, dataDict):
+    
+    start = attribute + ':\n'
+    lines = formatRelationshipDict(relation,dataDict)
+
+    return start + lines
