@@ -6,11 +6,11 @@ class directed_acyclic_graph:
         self.relationships = relationships
         self.nodeNames = nodeNames
 
-def createDAG():
+def createDictionaryDAG():
 
     return directed_acyclic_graph({}, []);
 
-def addRelationship(node,predecessor, graph):
+def addDictionaryRelationship(node,predecessor, graph):
 
     graphCopy = copy(graph)
 
