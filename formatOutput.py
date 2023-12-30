@@ -1,5 +1,5 @@
 
-def formatNames(dataList, recursive = False):
+def formatNamesList(dataList, recursive = False):
 
     numNames = len(dataList)
 
@@ -9,9 +9,9 @@ def formatNames(dataList, recursive = False):
         tail = dataList[1:]
 
         if len(tail) > 1:
-            return head + ', ' + formatNames(tail, recursive = True)
+            return head + ', ' + formatNamesList(tail, recursive = True)
         else:
-            return head + formatNames(tail, recursive = True)
+            return head + formatNamesList(tail, recursive = True)
         
     elif(recursive):
         return ' and ' + dataList[0] 
@@ -23,7 +23,26 @@ def oneType(type, dataList):
 
     start = type + ': '
     
-    namesString = formatNames(dataList)
+    namesString = formatNamesList(dataList)
     
 
     return start + namesString
+
+
+
+def formatDictNames(dataDict):
+
+    namesString = ''
+
+    stringsList = ['  ' + name + ': ' + str(dataDict[name]) for name in dataDict.keys()]
+    
+    return '\n'.join(stringsList)
+
+
+def dictSingleKey(attribute,dataDict):
+
+    start = attribute + ':\n'
+    names = formatDictNames(dataDict)
+
+    return start + names
+
