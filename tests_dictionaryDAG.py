@@ -204,6 +204,21 @@ def test_evaluating_incoming_node_type():
 
     assert {"1": "Only Source", "2": "Both", "8": "Both", "9": "Only Intermediary", "10": "Both" } == evaluateIncomingNodeTypes(testDAG)
 
+def test_evaluating_outgoing_node_type():
+
+    testDAG = createDictionaryDAG()
+    testDAG = addDictionaryRelationship("1","0",testDAG)
+    testDAG = addDictionaryRelationship("2","0",testDAG)
+    testDAG = addDictionaryRelationship("2","1",testDAG)
+    testDAG = addDictionaryRelationship("8","2",testDAG)
+    testDAG = addDictionaryRelationship("1","5",testDAG)
+    testDAG = addDictionaryRelationship("8","6",testDAG)
+    testDAG = addDictionaryRelationship("8","1",testDAG)
+    testDAG = addDictionaryRelationship("9","8",testDAG)
+    testDAG = addDictionaryRelationship("10","9",testDAG)
+    testDAG = addDictionaryRelationship("10","6",testDAG)
+    assert {"0": "Only Intermediary", "1": "Only Intermediary", "2": "Only Intermediary", "5" : "Only Intermediary", "6": "Both", "8": "Only Intermediary", "9": "Only Sink"} == evaluateOutgoingNodeTypes(testDAG)
+
 def test_filtering_incoming_node_type():
 
     testDAG = createDictionaryDAG()
@@ -219,6 +234,23 @@ def test_filtering_incoming_node_type():
     testDAG = addDictionaryRelationship("10","6",testDAG)
     
     assert (["9"] == filterForIncomingNodeTypes(testDAG, "Only Intermediary")) == (["1"] == filterForIncomingNodeTypes(testDAG, "Only Source") ) and  (["10", "2", "8"] == filterForIncomingNodeTypes(testDAG, "Both"))
+
+def test_filtering_outgoing_node_type():
+
+    testDAG = createDictionaryDAG()
+    testDAG = addDictionaryRelationship("1","0",testDAG)
+    testDAG = addDictionaryRelationship("2","0",testDAG)
+    testDAG = addDictionaryRelationship("2","1",testDAG)
+    testDAG = addDictionaryRelationship("8","2",testDAG)
+    testDAG = addDictionaryRelationship("1","5",testDAG)
+    testDAG = addDictionaryRelationship("8","6",testDAG)
+    testDAG = addDictionaryRelationship("8","1",testDAG)
+    testDAG = addDictionaryRelationship("9","8",testDAG)
+    testDAG = addDictionaryRelationship("10","9",testDAG)
+    testDAG = addDictionaryRelationship("10","6",testDAG)
+    
+    assert (["0","1","2","5","8"] == filterForOutgoingNodeTypes(testDAG, "Only Intermediary")) == (["9"] == filterForOutgoingNodeTypes(testDAG, "Only Sink") ) and  (["6"] == filterForOutgoingNodeTypes(testDAG, "Both"))
+
 
 if __name__ == "__main__":
 
@@ -248,8 +280,10 @@ if __name__ == "__main__":
     test_evaluate_node_types()
 
     test_evaluating_incoming_node_type()
+    test_evaluating_outgoing_node_type()
 
     test_filtering_incoming_node_type()
+    test_filtering_outgoing_node_type()
 
     print("Success!!")
 

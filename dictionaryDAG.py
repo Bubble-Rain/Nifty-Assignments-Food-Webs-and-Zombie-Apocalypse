@@ -168,7 +168,7 @@ def evaluateOutgoingNodeTypes(graph):
 
     nodeTypes = evaluateNodeTypes(graph)
 
-    return {node: evaluateOutgoingNodeType(graph.relationships[node], nodeTypes) for node in graph.relationships.keys()}
+    return {node: evaluateOutgoingNodeType(findSuccesors(node, graph), nodeTypes) for node in graph.nodeNames if findSuccesors(node, graph)}
 
 def filterForOutgoingNodeTypes(graph, desiredType):
 
