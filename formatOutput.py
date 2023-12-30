@@ -1,14 +1,22 @@
 
 def formatNames(dataList, recursive = False):
 
-    head, *tail = dataList
+    numNames = len(dataList)
 
-    if(not tail):
-        return head + ', ' + formatNames(tail, recursive = True)
+    if(numNames > 1 ):
+
+        head = dataList[0]
+        tail = dataList[1:]
+
+        if len(tail) > 1:
+            return head + ', ' + formatNames(tail, recursive = True)
+        else:
+            return head + formatNames(tail, recursive = True)
+        
     elif(recursive):
-        return ' and ' + head 
+        return ' and ' + dataList[0] 
     else:
-        return head
+        return dataList[0]
 
 
 def oneType(type, dataList):
