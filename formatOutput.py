@@ -3,7 +3,7 @@ def formatNamesList(dataList, recursive = False):
 
     numNames = len(dataList)
 
-    if(numNames > 1 ):
+    if(numNames > 1):
 
         head = dataList[0]
         tail = dataList[1:]
@@ -13,10 +13,12 @@ def formatNamesList(dataList, recursive = False):
         else:
             return head + formatNamesList(tail, recursive = True)
         
-    elif(recursive):
+    elif(recursive and numNames == 1):
         return ' and ' + dataList[0] 
-    else:
+    elif(not recursive and numNames == 1):
         return dataList[0]
+    else:
+        return '(None)'
 
 
 def oneType(type, dataList):

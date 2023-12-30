@@ -1,7 +1,9 @@
 from formatOutput import *
 
-def test_oneType_single():
+def test_oneType_Empty():
+    assert "Test: (None)" == oneType("Test", [])
 
+def test_oneType_single():
     assert "Test: Test 1" == oneType("Test", ["Test 1"])
 
 def test_oneType_two():
@@ -24,6 +26,7 @@ def test_formatRelationships_Multiple():
 
 if __name__ == '__main__':
 
+    test_oneType_Empty()
     test_oneType_single()
     test_oneType_two()
     test_oneType_four()
