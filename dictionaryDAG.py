@@ -138,6 +138,12 @@ def evaluateIncomingNodeTypes(graph):
 
     return {node: evaluateIncomingNodeType(graph.relationships[node], nodeTypes) for node in graph.relationships.keys()}
 
+def filterForIncomingNodeTypes(graph, desiredType):
+
+    nodeTypes = evaluateIncomingNodeTypes(graph)
+
+    return [node for node, nodeType in nodeTypes.items() if nodeType == desiredType]
+
 def calcLongestPath(node, relationships):
 
     if node not in relationships:
