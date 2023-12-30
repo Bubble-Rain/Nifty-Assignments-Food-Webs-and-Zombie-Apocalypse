@@ -49,6 +49,18 @@ def test_add_immutability_value():
 
     assert testDAG1.relationships != testDAG2.relationships
 
+
+def test_find_succesors():
+
+    testDAG = createDictionaryDAG()
+    testDAG = addDictionaryRelationship("1","0",testDAG)
+    testDAG = addDictionaryRelationship("2","0",testDAG)
+    testDAG = addDictionaryRelationship("2","1",testDAG)
+    testDAG = addDictionaryRelationship("1","5",testDAG)
+    testDAG = addDictionaryRelationship("8","6",testDAG)
+
+    assert ["1","2"] == findSuccesors("0",testDAG)
+
 def test_flatten_predecessors():
 
     testDAG = createDictionaryDAG()
@@ -114,17 +126,6 @@ def test_find_intermediaries():
     testDAG = addDictionaryRelationship("8","6",testDAG)
     
     assert ["1"] == findIntermediaries(testDAG)
-
-def test_find_incoming():
-
-    testDAG = createDictionaryDAG()
-    testDAG = addDictionaryRelationship("1","0",testDAG)
-    testDAG = addDictionaryRelationship("2","0",testDAG)
-    testDAG = addDictionaryRelationship("2","1",testDAG)
-    testDAG = addDictionaryRelationship("1","5",testDAG)
-    testDAG = addDictionaryRelationship("8","6",testDAG)
-    
-    assert ["1","2"] == findHigestIncoming(testDAG)
 
 def test_find_highest_incoming():
 
@@ -229,6 +230,7 @@ if __name__ == "__main__":
     test_add_immutability_key()
     test_add_immutability_value()
 
+    test_find_succesors()
     test_flatten_predecessors()
 
     test_calc_incoming_degree()

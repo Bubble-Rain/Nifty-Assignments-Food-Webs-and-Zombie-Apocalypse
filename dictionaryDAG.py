@@ -54,6 +54,10 @@ def flattenPredecessors(graph):
 
     return [predecessor for predecessors in graph.relationships.values() for predecessor in predecessors]
 
+def findSuccesors(node,graph):
+
+    return [succesor for succesor, predecessors in graph.relationships.items() if node in predecessors]
+
 def calcInDegree(graph):
 
     return {node: len(graph.relationships[node]) if node in graph.relationships else 0 for node in graph.nodeNames}
@@ -120,7 +124,7 @@ def evaluateIncomingNodeType(relatedNodes, nodeTypesDict):
 
     nodeTypes = [nodeTypesDict[node] for node in relatedNodes]
 
-    # By definition a Sink should have no related nodes
+    # By definition a Sink should not be an incoming connection
     types = ["Source","Intermediary"]
 
     type_count = {type:nodeTypes.count(type) for type in types}
@@ -141,6 +145,34 @@ def evaluateIncomingNodeTypes(graph):
 def filterForIncomingNodeTypes(graph, desiredType):
 
     nodeTypes = evaluateIncomingNodeTypes(graph)
+
+    return [node for node, nodeType in nodeTypes.items() if nodeType == desiredType]
+
+def evaluateOutgoingNodeType(relatedNodes, nodeTypesDict):
+
+    nodeTypes = [nodeTypesDict[node] for node in relatedNodes]
+
+    # By definition a Source should not be an outgoing direction
+    types = ["Sink","Intermediary"]
+
+    type_count = {type:nodeTypes.count(type) for type in types}
+
+    if type_count["Sink"] > 0 and type_count["Intermediary"] > 0:
+        return "Both"
+    elif type_count["Sink"] > 0:
+        return "Only Sink"
+    else:
+        return "Only Intermediary"
+    
+def evaluateOutgoingNodeTypes(graph):
+
+    nodeTypes = evaluateNodeTypes(graph)
+
+    return {node: evaluateOutgoingNodeType(graph.relationships[node], nodeTypes) for node in graph.relationships.keys()}
+
+def filterForOutgoingNodeTypes(graph, desiredType):
+
+    nodeTypes = evaluateOutgoingNodeTypes(graph)
 
     return [node for node, nodeType in nodeTypes.items() if nodeType == desiredType]
 
