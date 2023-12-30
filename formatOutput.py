@@ -32,7 +32,7 @@ def formatDictNames(dataDict, seperator, valueFunction):
 
     namesString = ''
 
-    stringsList = ['  ' + name + ': ' + valueFunction(dataDict[name]) for name in dataDict.keys()]
+    stringsList = ['  ' + name + seperator + valueFunction(dataDict[name]) for name in dataDict.keys()]
     
     return '\n'.join(stringsList)
 
@@ -47,6 +47,6 @@ def dictSingleKey(attribute,dataDict):
 def formatRelationships(relationShipType, relation, dataDict):
     
     start = relationShipType + ':\n'
-    lines = formatDictNames(relation, formatNamesList)
+    lines = formatDictNames(dataDict, ' ' + relation, formatNamesList)
 
     return start + lines
