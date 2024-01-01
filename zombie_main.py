@@ -1,6 +1,6 @@
 from Zombies import *
 from sysArgHandler import *
-
+from outputHandler import *
 
 outputPath = "zombieFiles/Output/"
 
@@ -33,13 +33,21 @@ if __name__ == '__main__':
 
     filePath, implementation = handleInput()
 
-    contactTracing = fileIngestion('zombieFiles/Input/DataSet1.txt', implementation)
+    contactTracing = fileIngestion(filePath, implementation)
 
     output = part1(contactTracing, implementation) + '\n\n' + part2(contactTracing, implementation) + '\n' + part3(contactTracing, implementation) + '\n' + part4(contactTracing, implementation) + '\n' + part5(contactTracing, implementation) + '\n' + part6(contactTracing, implementation) + '\n\n' + part7(contactTracing, implementation) + "\n\n" + part8(contactTracing, implementation)
 
     print(output)
 
+    writeFile(outputPath, filePath, output)
 
-    
+    print("Finished Outputting")
+
+
+
+
+
+
+
 
 
