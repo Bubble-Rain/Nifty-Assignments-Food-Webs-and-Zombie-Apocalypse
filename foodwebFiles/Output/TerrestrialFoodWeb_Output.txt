@@ -15,16 +15,16 @@ Most Flexible Eaters: Lion
 Tastiest: Mouse
 
 Heights:
+  Goat: 1
+  Jackal: 2
   Kite: 3
   Lion: 3
-  Jackal: 2
+  Mouse: 1
   Owl: 2
+  Plants: 0
+  Rabbit: 1
   Snake: 2
   Wild Cat: 2
-  Goat: 1
-  Mouse: 1
-  Rabbit: 1
-  Plants: 0
 
 For an A+:
   Herbivores: Goat, Mouse and Rabbit
