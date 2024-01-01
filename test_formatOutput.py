@@ -15,8 +15,11 @@ def test_oneType_four():
 def test_dictSingleKey_Single():
     assert "Tests:\n  Test 1: 1" == dictSingleKey("Tests", {"Test 1": 1})
 
-def test_dictSingleKey_Multiple():
+def test_dictSingleKey_Multiple_Alphabetical():
     assert "Tests:\n  Test 1: 1\n  Test 2: 2\n  Test 3: 3\n  Test 4: 4" == dictSingleKey("Tests", {"Test 1": 1, "Test 2": 2, "Test 3": 3, "Test 4": 4})
+
+def test_dictSingleKey_Multiple_Height():
+    assert "Tests:\n  Test 1: 1\n  Test 2: 2\n  Test 3: 3\n  Test 4: 4" == dictSingleKey("Tests", {"Test 1": 1, "Test 2": 2, "Test 3": 3, "Test 4": 4}, "value")
 
 def test_formatRelationships_Single():
    assert "Tests:\n  Test 1 tests Test 2" == formatRelationships("Tests", "tests ", {"Test 1": ["Test 2"]})
@@ -31,7 +34,8 @@ if __name__ == '__main__':
     test_oneType_two()
     test_oneType_four()
     test_dictSingleKey_Single()
-    test_dictSingleKey_Multiple()
+    test_dictSingleKey_Multiple_Alphabetical()
+    test_dictSingleKey_Multiple_Height
     test_formatRelationships_Single()
     test_formatRelationships_Multiple()
     print("Success!!")

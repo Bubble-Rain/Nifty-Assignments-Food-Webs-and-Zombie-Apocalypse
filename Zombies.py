@@ -72,7 +72,7 @@ def determineMaximumDistanceFromPotentialZombie(graph, implementation = 'dDAG'):
     if implementation == 'dDAG':
         distance_dict = dDAG.calcLongestPathsFromSource(graph)
     
-    return fO.dictSingleKey('Heights', distance_dict)
+    return fO.dictSingleKey('Heights', distance_dict, 'value')
 
 def identifySpreaderZombies(graph, implementation = 'dDAG'):
 

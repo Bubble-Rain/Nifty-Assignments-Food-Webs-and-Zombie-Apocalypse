@@ -39,10 +39,16 @@ def formatDictNames(dataDict, seperator, valueFunction):
     return '\n'.join(stringsList)
 
 
-def dictSingleKey(attribute,dataDict):
+def dictSingleKey(attribute,dataDict, order = "alphabetical"):
 
     start = attribute + ':\n'
-    names = formatDictNames(dataDict, ': ', str)
+
+    if(order == 'value'):
+        sortedDict = dict(sorted(dataDict.items(), key = lambda x: (-x[1],x[0]), reverse = False))
+    else:
+        sortedDict = dict(sorted(dataDict.items(), key = lambda x: (x[0]), reverse = False))
+    
+    names = formatDictNames(sortedDict, ': ', str)
 
     return start + names
 
