@@ -17,5 +17,5 @@ def fileIngestion(path, graph, addRelationshipFunction):
 
         for predecessor in predecessors:
             graphCopy = addRelationshipFunction(node, predecessor, graphCopy)
-        
+    csvFile.close()  
     return graphCopy
