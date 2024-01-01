@@ -39,7 +39,7 @@ if __name__ == '__main__':
 
     print(output)
 
-    writeFile(outputPath, filePath, output)
+    writeFile(outputPath, '-out', filePath, output)
 
     print("Finished Outputting")
 
